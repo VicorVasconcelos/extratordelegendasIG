@@ -1,0 +1,15 @@
+# GitHub Pages Configuration
+
+# Configuração para publicar no GitHub Pages
+# Passos:
+# 1. Crie um repositório público no GitHub
+# 2. Copie os arquivos deste projeto para o repositório
+# 3. Vá em Settings > Pages e configure a branch
+# 4. Seu site estará disponível em: https://seu-usuario.github.io/repo-name
+
+# Arquivos necessários:
+# - index.html (arquivo principal)
+# - style.css (estilos)
+# - script.js (lógica)
+# - README.md (documentação)
+# - manifest.json (configuração PWA)

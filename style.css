@@ -1,0 +1,461 @@
+/* Reset e variáveis */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #E1306C;
+    --secondary-color: #405DE6;
+    --success-color: #31a24c;
+    --error-color: #ff4458;
+    --text-dark: #262626;
+    --text-light: #65676b;
+    --bg-light: #f5f5f5;
+    --border-color: #dbdbdb;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    opacity: 0.95;
+    font-weight: 300;
+}
+
+main {
+    flex: 1;
+    padding: 40px 30px;
+}
+
+.input-section {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#urlInput {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    -webkit-appearance: none; /* Remove estilo padrão iOS */
+}
+
+#urlInput:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(225, 48, 108, 0.1);
+}
+
+/* Melhorar seleção de texto no input */
+#urlInput::selection {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* Melhorar toque em mobile */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    min-width: 140px;
+    white-space: nowrap;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(225, 48, 108, 0.4);
+}
+
+.btn-secondary {
+    background: var(--bg-light);
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+    padding: 10px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-secondary:hover {
+    background: #e8e8e8;
+    border-color: var(--text-light);
+}
+
+.btn-secondary:active {
+    background: #d8d8d8;
+}
+
+.help-text {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 5px;
+}
+
+.result-section {
+    animation: slideIn 0.3s ease;
+}
+
+.result-section.hidden {
+    display: none;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.result-header h2 {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.result-content {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    margin-bottom: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+    /* Melhor experiência de seleção */
+    user-select: text;
+    -webkit-user-select: text;
+    /* Scroll suave em mobile */
+    -webkit-overflow-scrolling: touch;
+}
+
+.result-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.result-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.result-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.result-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.error-section {
+    background: #fee;
+    border: 1px solid var(--error-color);
+    border-radius: 8px;
+    padding: 15px;
+    color: var(--error-color);
+    margin-bottom: 15px;
+    animation: slideIn 0.3s ease;
+}
+
+.error-section.hidden {
+    display: none;
+}
+
+.loading-section {
+    text-align: center;
+    padding: 40px 20px;
+    animation: slideIn 0.3s ease;
+}
+
+.loading-section.hidden {
+    display: none;
+}
+
+.spinner {
+    border: 4px solid var(--bg-light);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+footer {
+    background: var(--bg-light);
+    padding: 20px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
+    line-height: 1.6;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+footer a:hover {
+    opacity: 0.8;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        border-radius: 0;
+        max-width: 100%;
+        min-height: 100vh;
+    }
+
+    header {
+        padding: 25px 20px;
+    }
+
+    header h1 {
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    main {
+        padding: 25px 20px;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    .input-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    #urlInput {
+        width: 100%;
+        padding: 16px 15px;
+        font-size: 16px; /* Previne zoom no iOS */
+        border-radius: 10px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 16px 24px;
+        font-size: 1.1rem;
+        border-radius: 10px;
+    }
+
+    .btn-secondary {
+        padding: 14px 20px;
+        font-size: 1rem;
+        border-radius: 10px;
+    }
+
+    .help-text {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+
+    .result-header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .result-header h2 {
+        font-size: 1.2rem;
+    }
+
+    #copyBtn {
+        align-self: auto;
+        min-width: 100px;
+    }
+
+    .result-content {
+        padding: 20px 18px;
+        font-size: 1rem;
+        line-height: 1.7;
+        max-height: 400px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        /* Melhor legibilidade em mobile */
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #clearBtn {
+        width: 100%;
+        padding: 16px;
+        font-size: 1rem;
+    }
+
+    .error-section {
+        padding: 18px;
+        font-size: 0.95rem;
+        border-radius: 10px;
+    }
+
+    .loading-section {
+        padding: 50px 20px;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border-width: 5px;
+    }
+
+    footer {
+        padding: 20px 15px;
+        font-size: 0.8rem;
+    }
+
+    footer p {
+        margin: 8px 0;
+    }
+}
+
+/* Tablets e telas médias */
+@media (min-width: 601px) and (max-width: 900px) {
+    .container {
+        max-width: 700px;
+    }
+
+    header h1 {
+        font-size: 1.9rem;
+    }
+
+    main {
+        padding: 35px 30px;
+    }
+}
+
+/* Feedback visual */
+.success-message {
+    color: var(--success-color);
+    font-weight: 600;
+    animation: fadeInOut 2s ease;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

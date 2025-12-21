@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#E1306C">
+    <title>Extrator de Legendas - Instagram</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📸 Extrator de Legendas</h1>
+            <p class="subtitle">Cole o link do Instagram e extraia a legenda</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <label for="urlInput">Cole o link do Instagram:</label>
+                <div class="input-group">
+                    <input 
+                        type="url" 
+                        id="urlInput" 
+                        placeholder="Cole aqui o link..."
+                        aria-label="Link do Instagram"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                    >
+                    <button id="extractBtn" class="btn-primary">✨ Extrair</button>
+                </div>
+                <small class="help-text">📱 Cole o link do post, reel, IGTV ou story</small>
+            </div>
+
+            <div id="resultSection" class="result-section hidden">
+                <div class="result-header">
+                    <h2>Legenda Extraída:</h2>
+                    <div class="action-buttons">
+                        <button id="copyBtn" class="btn-secondary" title="Copiar legenda">📋 Copiar</button>
+                        <button id="shareBtn" class="btn-secondary hidden" title="Compartilhar">🔗 Compartilhar</button>
+                    </div>
+                </div>
+                <div id="resultContent" class="result-content"></div>
+                <button id="clearBtn" class="btn-secondary">Limpar</button>
+            </div>
+
+            <div id="errorSection" class="error-section hidden">
+                <p id="errorMessage"></p>
+            </div>
+
+            <div id="loadingSection" class="loading-section hidden">
+                <div class="spinner"></div>
+                <p>Processando...</p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Extrator de Legendas &copy; 2025</p>
+            <p>Desenvolvido por <strong>Victor Vasconcelos</strong> | WhatsApp: <a href="https://wa.me/5561984385187" target="_blank" style="color: #25D366; text-decoration: none;">📱 (61) 98438-5187</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
