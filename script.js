@@ -1,9 +1,7 @@
-// API para extrair dados do Instagram
-// Usando a API InstagramAPI (API pública gratuita)
 
 const API_BASE = 'https://www.instagram.com';
 
-// Elementos do DOM
+// Elementos
 const urlInput = document.getElementById('urlInput');
 const extractBtn = document.getElementById('extractBtn');
 const resultSection = document.getElementById('resultSection');
@@ -15,7 +13,7 @@ const errorSection = document.getElementById('errorSection');
 const errorMessage = document.getElementById('errorMessage');
 const loadingSection = document.getElementById('loadingSection');
 
-// Event listeners
+// Event
 extractBtn.addEventListener('click', extractCaption);
 urlInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') extractCaption();
@@ -95,7 +93,7 @@ async function fetchCaptionFromInstagram(url) {
         // Normalizar URL para formato padrão
         const normalizedUrl = `https://www.instagram.com/p/${postId}/`;
         
-        // Tentar múltiplos métodos
+        // Tentar outros métodos
         return await extractCaptionWithProxy(normalizedUrl);
 
     } catch (error) {
@@ -316,8 +314,6 @@ function showLoading(show) {
         loadingSection.classList.add('hidden');
     }
 }
-
-// Foco no input ao carregar a página
 window.addEventListener('load', () => {
     urlInput.focus();
 });
