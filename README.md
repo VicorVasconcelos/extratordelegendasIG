@@ -1,11 +1,11 @@
-# 📸 Extrator de Legendas do Instagram
+# 📸 Extrator de Legendas (Instagram e Facebook)
 
-Extraia legendas de posts, reels, IGTV e stories do Instagram com apenas um clique!
+Extraia legendas de posts, reels, vídeos e stories do Instagram e Facebook com apenas um clique!
 
 ## 🚀 Como Usar
 
 1. Acesse o extrator
-2. Cole o link do post do Instagram
+2. Cole o link do post/reel/vídeo do Instagram ou Facebook
 3. Clique em **Extrair Legenda**
 4. Copie a legenda extraída
 
@@ -17,7 +17,7 @@ Simples assim! ✨
 
 ## 💡 Funcionalidades
 
-- ✅ Extrai legendas de posts, reels, IGTV e stories
+- ✅ Extrai legendas de conteúdos públicos do Instagram e Facebook
 - ✅ Interface responsiva (mobile e desktop)
 - ✅ Copiar legenda com um clique
 - ✅ Compartilhar legenda (mobile)

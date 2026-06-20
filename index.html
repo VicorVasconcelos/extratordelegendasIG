@@ -6,34 +6,36 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#E1306C">
-    <title>Extrator de Legendas - Instagram</title>
+    <meta name="theme-color" content="#405DE6">
+    <title>Extrator de Legendas - Instagram e Facebook</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <canvas id="lightfallCanvas"></canvas>
+
     <div class="container">
         <header>
-            <h1>📸 Extrator de Legendas</h1>
-            <p class="subtitle">Cole o link do Instagram e extraia a legenda</p>
+            <h1>📸 Extrator de Legendas 2.0</h1>
+            <p class="subtitle">Cole o link do Instagram ou Facebook e extraia a legenda</p>
         </header>
 
         <main>
             <div class="input-section">
-                <label for="urlInput">Cole o link do Instagram:</label>
+                <label for="urlInput">Cole o link do Instagram ou Facebook:</label>
                 <div class="input-group">
                     <input 
                         type="url" 
                         id="urlInput" 
                         placeholder="Cole aqui o link..."
-                        aria-label="Link do Instagram"
+                        aria-label="Link do Instagram ou Facebook"
                         autocomplete="off"
                         autocapitalize="off"
                         spellcheck="false"
                     >
                     <button id="extractBtn" class="btn-primary">✨ Extrair</button>
                 </div>
-                <small class="help-text">📱 Cole o link do post, reel, IGTV ou story</small>
+                <small class="help-text">📱 Cole o link do post, reel, vídeo ou story (Instagram/Facebook)</small>
             </div>
 
             <div id="resultSection" class="result-section hidden">

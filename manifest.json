@@ -1,7 +1,7 @@
 {
   "name": "Extrator de Legendas",
   "short_name": "Legendas",
-  "description": "Extrator de legendas do Instagram através do link",
+  "description": "Extrator de legendas do Instagram e Facebook através do link",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",

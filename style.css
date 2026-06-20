@@ -18,20 +18,35 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    /* Gradiente roxo perdendo a cor (suavizando pro rosa) para a direita */
+    background: linear-gradient(to right, var(--secondary-color) 0%, var(--primary-color) 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    overflow-x: hidden;
+}
+
+/* Estilo do novo background dinâmico */
+#lightfallCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
 }
 
 .container {
     width: 100%;
     max-width: 600px;
-    background: white;
+    /* Fundo levemente transparente para ver o efeito atrás */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 12px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -39,10 +54,11 @@ body {
 }
 
 header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+    background: transparent;
+    color: var(--text-dark);
     padding: 40px 30px;
     text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 header h1 {
@@ -53,8 +69,8 @@ header h1 {
 
 .subtitle {
     font-size: 0.95rem;
-    opacity: 0.95;
-    font-weight: 300;
+    opacity: 0.8;
+    font-weight: 400;
 }
 
 main {
@@ -86,19 +102,19 @@ label {
     border: 2px solid var(--border-color);
     border-radius: 8px;
     font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.9);
     transition: all 0.3s ease;
-    -webkit-appearance: none; /* Remove estilo padrão iOS */
+    -webkit-appearance: none;
 }
 
 #urlInput:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(225, 48, 108, 0.1);
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(64, 93, 230, 0.1);
 }
 
-/* Melhorar seleção de texto no input */
 #urlInput::selection {
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     color: white;
 }
 
@@ -111,13 +127,12 @@ label {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    /* Melhorar toque em mobile */
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
     color: white;
     min-width: 140px;
     white-space: nowrap;
@@ -125,12 +140,12 @@ label {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
+    box-shadow: 0 4px 12px rgba(64, 93, 230, 0.3);
 }
 
 .btn-primary:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(225, 48, 108, 0.4);
+    box-shadow: 0 2px 8px rgba(64, 93, 230, 0.4);
 }
 
 .btn-secondary {
@@ -186,10 +201,10 @@ label {
 }
 
 .result-content {
-    background: var(--bg-light);
+    background: rgba(245, 245, 245, 0.8);
     padding: 20px;
     border-radius: 8px;
-    border-left: 4px solid var(--primary-color);
+    border-left: 4px solid var(--secondary-color);
     margin-bottom: 15px;
     max-height: 300px;
     overflow-y: auto;
@@ -198,10 +213,8 @@ label {
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--text-dark);
-    /* Melhor experiência de seleção */
     user-select: text;
     -webkit-user-select: text;
-    /* Scroll suave em mobile */
     -webkit-overflow-scrolling: touch;
 }
 
@@ -224,7 +237,7 @@ label {
 }
 
 .error-section {
-    background: #fee;
+    background: rgba(255, 238, 238, 0.9);
     border: 1px solid var(--error-color);
     border-radius: 8px;
     padding: 15px;
@@ -249,7 +262,7 @@ label {
 
 .spinner {
     border: 4px solid var(--bg-light);
-    border-top: 4px solid var(--primary-color);
+    border-top: 4px solid var(--secondary-color);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -258,32 +271,22 @@ label {
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 footer {
-    background: var(--bg-light);
+    background: transparent;
     padding: 20px;
     text-align: center;
     color: var(--text-light);
     font-size: 0.85rem;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid rgba(0,0,0,0.05);
     line-height: 1.6;
 }
 
@@ -310,6 +313,7 @@ footer a:hover {
         border-radius: 0;
         max-width: 100%;
         min-height: 100vh;
+        background: rgba(255, 255, 255, 0.92);
     }
 
     header {
@@ -341,7 +345,7 @@ footer a:hover {
     #urlInput {
         width: 100%;
         padding: 16px 15px;
-        font-size: 16px; /* Previne zoom no iOS */
+        font-size: 16px; 
         border-radius: 10px;
     }
 
@@ -387,7 +391,6 @@ footer a:hover {
         max-height: 400px;
         border-radius: 10px;
         margin-bottom: 20px;
-        /* Melhor legibilidade em mobile */
         -webkit-overflow-scrolling: touch;
     }
 
@@ -423,7 +426,6 @@ footer a:hover {
     }
 }
 
-/* Tablets e telas médias */
 @media (min-width: 601px) and (max-width: 900px) {
     .container {
         max-width: 700px;
@@ -438,7 +440,6 @@ footer a:hover {
     }
 }
 
-/* Feedback visual */
 .success-message {
     color: var(--success-color);
     font-weight: 600;
@@ -446,16 +447,8 @@ footer a:hover {
 }
 
 @keyframes fadeInOut {
-    0% {
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+    0% { opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
 }

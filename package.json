@@ -1,18 +1,19 @@
 {
   "name": "extrator-legendas-instagram",
   "version": "1.0.0",
-  "description": "Extrator de legendas do Instagram através do link",
+  "description": "Extrator de legendas do Instagram e Facebook através do link",
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8000"
   },
   "keywords": [
     "instagram",
+    "facebook",
     "caption",
     "extrator",
     "legendas",
     "web"
   ],
-  "author": "Seu Nome",
+  "author": "Victor Vasconcelos",
   "license": "MIT"
 }
