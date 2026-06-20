@@ -33,7 +33,6 @@ async function executeWithRetry(fn, maxRetries = 2, delayMs = 1500) {
             attempt++;
             console.warn(`Tentativa ${attempt} falhou. Motivo: ${error.message}`);
             if (attempt >= maxRetries) throw error;
-            // Aguarda um tempo antes de tentar novamente
             await new Promise(resolve => setTimeout(resolve, delayMs));
         }
     }
@@ -70,9 +69,6 @@ async function extractCaption() {
     }
 }
 
-/**
- * Valida se a URL é um link válido
- */
 function isValidSocialUrl(url) {
     try {
         const urlObj = new URL(url);
@@ -103,9 +99,6 @@ function isValidSocialUrl(url) {
     }
 }
 
-/**
- * Detecta a plataforma da URL
- */
 function detectPlatform(url) {
     try {
         const hostname = new URL(url).hostname.toLowerCase();
@@ -122,17 +115,11 @@ function detectPlatform(url) {
     }
 }
 
-/**
- * Extrai o ID do post/reel/IGTV
- */
 function extractPostId(url) {
     const match = url.match(/\/(p|reel|reels|tv|stories)\/([a-zA-Z0-9_-]+)/);
     return match ? match[2] : null;
 }
 
-/**
- * Busca legenda conforme plataforma
- */
 async function fetchCaption(url) {
     const platform = detectPlatform(url);
     lastDetectedPlatform = platform;
@@ -144,9 +131,6 @@ async function fetchCaption(url) {
     throw new Error('Não foi possível identificar a plataforma do link.');
 }
 
-/**
- * Busca legenda do Instagram
- */
 async function fetchInstagramCaption(url) {
     const postId = extractPostId(url);
     if (!postId) throw new Error('Não foi possível extrair o ID do conteúdo do Instagram.');
@@ -187,9 +171,6 @@ async function fetchInstagramCaption(url) {
     throw new Error('Falha em todas as estratégias de extração.');
 }
 
-/**
- * Busca legenda do Facebook
- */
 async function fetchFacebookCaption(url) {
     const normalizedUrl = normalizeFacebookUrl(url);
 
@@ -216,9 +197,6 @@ async function fetchFacebookCaption(url) {
     throw new Error('Falha em todas as estratégias de extração do Facebook.');
 }
 
-/**
- * Busca o conteúdo de uma URL usando um proxy CORS
- */
 async function fetchWithProxy(url, provider) {
     let targetUrl;
     if (provider === 'allorigins') {
@@ -241,9 +219,6 @@ async function fetchWithProxy(url, provider) {
     }
 }
 
-/**
- * Busca JSON de uma URL pública
- */
 async function fetchJson(url) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
@@ -260,9 +235,6 @@ async function fetchJson(url) {
     }
 }
 
-/**
- * Extrai a legenda do HTML/texto do Instagram
- */
 function extractInstagramCaptionFromHTML(html) {
     try {
         const embedCaptionMatch = html.match(/class=["']Caption["'][^>]*>\s*<[^>]+>[^<]*<\/[^>]+>([\s\S]*?)<\/div>/i);
@@ -314,9 +286,6 @@ function extractInstagramCaptionFromHTML(html) {
     }
 }
 
-/**
- * Extrai a legenda do HTML do Facebook
- */
 function extractFacebookCaptionFromHTML(html) {
     try {
         const ldJsonCaptions = extractCaptionFromLdJson(html);
@@ -353,9 +322,6 @@ function extractFacebookCaptionFromHTML(html) {
     }
 }
 
-/**
- * Extrai legendas de JSON-LD
- */
 function extractCaptionFromLdJson(html) {
     const captions = [];
     const matches = [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)];
@@ -381,9 +347,6 @@ function extractCaptionFromLdJson(html) {
     return captions;
 }
 
-/**
- * Extrai meta tags
- */
 function extractMetaContent(html, attr, attrValue) {
     const regex = new RegExp(`<meta[^>]*${attr}=["']${attrValue}["'][^>]*content=["']([\\s\\S]*?)["'][^>]*>`, 'i');
     const reverseRegex = new RegExp(`<meta[^>]*content=["']([\\s\\S]*?)["'][^>]*${attr}=["']${attrValue}["'][^>]*>`, 'i');
@@ -391,9 +354,6 @@ function extractMetaContent(html, attr, attrValue) {
     return match?.[1] ? decodeHTMLEntities(match[1]) : null;
 }
 
-/**
- * Normaliza legenda
- */
 function sanitizeCaption(text, platform) {
     if (!text) return null;
 
@@ -427,9 +387,6 @@ function sanitizeCaption(text, platform) {
     return caption;
 }
 
-/**
- * Normaliza URL do Facebook
- */
 function normalizeFacebookUrl(url) {
     try {
         const urlObj = new URL(url);
@@ -450,9 +407,6 @@ function normalizeFacebookUrl(url) {
     }
 }
 
-/**
- * Utilitários de decodificação
- */
 function decodeHTMLEntities(text) {
     const textarea = document.createElement('textarea');
     textarea.innerHTML = text;
@@ -469,9 +423,6 @@ function decodeUnicodeEscapes(text) {
         .replace(/\\\\/g, '\\');
 }
 
-/**
- * Interface - Resultados
- */
 function showResults(caption) {
     resultContent.textContent = caption || 'Nenhuma legenda encontrada';
     resultSection.classList.remove('hidden');
@@ -565,10 +516,19 @@ function initLightfall() {
     let lastWidth = window.innerWidth;
 
     function resize() {
+        // Pega a densidade de pixels nativa do aparelho (Retina Displays)
+        const dpr = window.devicePixelRatio || 1;
+        
         width = window.innerWidth;
         height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+        
+        // Multiplica a resolução física do canvas pelo DPR
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        
+        // Ajusta o contexto para usar coordenadas lógicas do CSS
+        ctx.scale(dpr, dpr);
+        
         createParticles();
     }
 
@@ -583,7 +543,6 @@ function initLightfall() {
     });
 
     window.addEventListener('resize', () => {
-        // Trava para o canvas só reiniciar se a tela mudar de largura no mobile
         if (window.innerWidth !== lastWidth) {
             lastWidth = window.innerWidth;
             resize();

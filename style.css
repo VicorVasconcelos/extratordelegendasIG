@@ -18,7 +18,6 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    /* Gradiente roxo perdendo a cor (suavizando pro rosa) para a direita */
     background: linear-gradient(to right, var(--secondary-color) 0%, var(--primary-color) 100%);
     min-height: 100vh;
     display: flex;
@@ -28,21 +27,20 @@ body {
     overflow-x: hidden;
 }
 
-/* Estilo do novo background dinâmico */
+/* Estilo do background dinâmico */
 #lightfallCanvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 0; /* Alterado para 0 para não sumir no mobile */
-    pointer-events: none; /* Permite clicar nos elementos atrás, se houver */
+    z-index: 0;
+    pointer-events: none;
 }
 
 .container {
     width: 100%;
     max-width: 600px;
-    /* Fundo levemente transparente para ver o efeito atrás */
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -52,8 +50,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 500px;
-    position: relative; /* Necessário para o z-index funcionar */
-    z-index: 1; /* Garante que o painel fique por cima do canvas */
+    position: relative;
+    z-index: 1;
 }
 
 header {
@@ -316,7 +314,10 @@ footer a:hover {
         border-radius: 0;
         max-width: 100%;
         min-height: 100vh;
-        background: rgba(255, 255, 255, 0.92);
+        /* Reduzido de 0.92 para 0.6 para o background do canvas ser visível */
+        background: rgba(255, 255, 255, 0.6); 
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
     }
 
     header {
