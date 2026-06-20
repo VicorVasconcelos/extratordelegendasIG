@@ -41,7 +41,8 @@ body {
 .container {
     width: 100%;
     max-width: 600px;
-    background: rgba(255, 255, 255, 0.85);
+    /* Reduzido de 0.85 para 0.75 (10% mais transparente no desktop) */
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 12px;
@@ -314,8 +315,8 @@ footer a:hover {
         border-radius: 0;
         max-width: 100%;
         min-height: 100vh;
-        /* Reduzido de 0.92 para 0.6 para o background do canvas ser visível */
-        background: rgba(255, 255, 255, 0.6); 
+        /* Reduzido de 0.6 para 0.5 (10% mais transparente no mobile) */
+        background: rgba(255, 255, 255, 0.5); 
         backdrop-filter: blur(4px);
         -webkit-backdrop-filter: blur(4px);
     }

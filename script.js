@@ -63,7 +63,7 @@ async function extractCaption() {
         showResults(caption);
     } catch (error) {
         console.error('Erro final:', error);
-        showError(`Não foi possível extrair a legenda após várias tentativas. Verifique se o conteúdo é público.`);
+        showError(`Não foi possível extrair a legenda. O conteúdo pode ser privado ou o Instagram bloqueou o acesso.`);
     } finally {
         showLoading(false);
     }
@@ -354,6 +354,9 @@ function extractMetaContent(html, attr, attrValue) {
     return match?.[1] ? decodeHTMLEntities(match[1]) : null;
 }
 
+/**
+ * Normaliza e LIMPA lixos de resposta da legenda
+ */
 function sanitizeCaption(text, platform) {
     if (!text) return null;
 
@@ -364,6 +367,17 @@ function sanitizeCaption(text, platform) {
     caption = decodeHTMLEntities(decodeUnicodeEscapes(caption))
         .replace(/\s+/g, ' ')
         .trim();
+        
+    // ==========================================
+    // NOVA TRAVA DE SEGURANÇA CONTRA LIXOS DE API
+    // ==========================================
+    const lowerCaption = caption.toLowerCase();
+    if (lowerCaption.includes('markdown content')) return null;
+    if (lowerCaption.includes('log in to instagram')) return null;
+    if (lowerCaption.includes('log in to see photos')) return null;
+    if (lowerCaption === 'instagram') return null;
+    if (lowerCaption === 'facebook') return null;
+    if (lowerCaption.includes('something went wrong')) return null;
 
     if (platform === 'instagram') {
         caption = caption
@@ -516,17 +530,14 @@ function initLightfall() {
     let lastWidth = window.innerWidth;
 
     function resize() {
-        // Pega a densidade de pixels nativa do aparelho (Retina Displays)
         const dpr = window.devicePixelRatio || 1;
         
         width = window.innerWidth;
         height = window.innerHeight;
         
-        // Multiplica a resolução física do canvas pelo DPR
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         
-        // Ajusta o contexto para usar coordenadas lógicas do CSS
         ctx.scale(dpr, dpr);
         
         createParticles();
