@@ -35,7 +35,8 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    z-index: 0; /* Alterado para 0 para não sumir no mobile */
+    pointer-events: none; /* Permite clicar nos elementos atrás, se houver */
 }
 
 .container {
@@ -51,6 +52,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 500px;
+    position: relative; /* Necessário para o z-index funcionar */
+    z-index: 1; /* Garante que o painel fique por cima do canvas */
 }
 
 header {

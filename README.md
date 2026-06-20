@@ -13,7 +13,7 @@ Simples assim! ✨
 
 ## 🌐 Acesso
 
-👉 **[Clique aqui para usar](https://seu-usuario.github.io)**
+👉 **[Clique aqui para usar](https://vicorvasconcelos.github.io/extratordelegendasIG/)**
 
 ## 💡 Funcionalidades
 

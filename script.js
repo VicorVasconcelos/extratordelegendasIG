@@ -562,6 +562,7 @@ function initLightfall() {
     
     let particles = [];
     let mouse = { x: null, y: null };
+    let lastWidth = window.innerWidth;
 
     function resize() {
         width = window.innerWidth;
@@ -581,7 +582,13 @@ function initLightfall() {
         mouse.y = null;
     });
 
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', () => {
+        // Trava para o canvas só reiniciar se a tela mudar de largura no mobile
+        if (window.innerWidth !== lastWidth) {
+            lastWidth = window.innerWidth;
+            resize();
+        }
+    });
 
     class Streak {
         constructor() {
@@ -645,9 +652,6 @@ function initLightfall() {
     function animate() {
         requestAnimationFrame(animate);
         
-        // Em vez de pintar de azul sólido, usamos "destination-out" 
-        // para ir apagando os traços aos poucos. Isso mantém as trilhas 
-        // mas deixa o fundo transparente para o CSS brilhar por trás!
         ctx.globalCompositeOperation = 'destination-out';
         ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
         ctx.fillRect(0, 0, width, height);
